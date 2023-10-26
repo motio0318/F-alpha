@@ -44,7 +44,7 @@ using UnityEngine;
             position.y += speed;
             onBottomColumn = false;
         }
-        if (Input.GetKeyDown("down"))
+        if (Input.GetKeyDown("down") && !onBottomColumn)
         {
             position.y -= speed;
             onBottomColumn = true;
