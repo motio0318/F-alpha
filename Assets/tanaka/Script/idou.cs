@@ -20,6 +20,9 @@ using UnityEngine;
     public GameObject AttackEffect;
     public GameObject ShotEffect;
 
+    public GameObject ghostPrefab; //残像用のプレハブ
+
+
     void Start()
     {
 
@@ -33,19 +36,23 @@ using UnityEngine;
 
         if (Input.GetKeyDown("left"))
         {
+            FadeOut();
             position.x -= speed;
          }
         if (Input.GetKeyDown("right"))
         {
+            FadeOut();
             position.x += speed;
         }
         if (Input.GetKeyDown("up"))
         {
+            FadeOut();
             position.y += speed;
             onBottomColumn = false;
         }
         if (Input.GetKeyDown("down") && !onBottomColumn)
         {
+            FadeOut();
             position.y -= speed;
             onBottomColumn = true;
         }
@@ -79,8 +86,8 @@ using UnityEngine;
 
     }
 
-        private void FixedUpdate()
-        {
+    private void FixedUpdate()
+    {
         if (onAttack)
         {
             time += 0.02f;
@@ -111,7 +118,15 @@ using UnityEngine;
         }
 
     }
+
+    void FadeOut()
+    {
+        //元のオブジェクトの位置に残像を生成
+        GameObject ghost =
+            Instantiate(ghostPrefab, transform.position, transform.rotation);
     }
+
+}
 
 
 
